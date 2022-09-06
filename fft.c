@@ -98,3 +98,17 @@ void FFT_2D(void *src, void *dest, uint32_t size, uint32_t inverse) {
 	}
 	free(sort);
 }
+
+void FFT_MIRROR(void *ft, uint32_t size) {
+	fft_complex *dat = ft, tmp;
+	for (uint32_t i=0, j=size/2; i < size/2; i++,j++)
+		tmp = dat[i], dat[i] = dat[j], dat[j] = tmp;
+}
+
+void FFT_MIRROR_2D(void *ft, uint32_t size) {
+	fft_complex *dat = ft, tmp;
+	for (uint32_t i=0, u=size/2; i < size/2; i++,u++)
+		for (uint32_t j=0, v=size/2; j < size/2; j++,v++)
+			tmp = dat[i*size+j], dat[i*size+j] = dat[u*size+v], dat[u*size+v] = tmp,
+			tmp = dat[i*size+v], dat[i*size+v] = dat[u*size+j], dat[u*size+j] = tmp;
+}
