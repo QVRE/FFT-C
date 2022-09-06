@@ -33,4 +33,11 @@ void FFT_2D(void *src, void *dest, uint32_t size, uint32_t inverse);
 void FFT_MIRROR(void *ft, uint32_t size);
 
 void FFT_MIRROR_2D(void *ft, uint32_t size);
+
+//these functions take your FT and return a new array of amplitudes without phase information
+//you need to call free() on this array yourself
+
+void* FFT_AMPLITUDE(void *ft, uint32_t size);
+
+void* FFT_AMPLITUDE_2D(void *ft, uint32_t size);
 #endif

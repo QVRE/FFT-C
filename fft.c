@@ -112,3 +112,16 @@ void FFT_MIRROR_2D(void *ft, uint32_t size) {
 			tmp = dat[i*size+j], dat[i*size+j] = dat[u*size+v], dat[u*size+v] = tmp,
 			tmp = dat[i*size+v], dat[i*size+v] = dat[u*size+j], dat[u*size+j] = tmp;
 }
+
+void* FFT_AMPLITUDE(void *ft, uint32_t size) {
+	FFT_FLOAT_TYPE *amp = malloc(size * sizeof(FFT_FLOAT_TYPE));
+	fft_complex *dat = ft;
+	for (uint32_t i=0; i < size; i++)
+		amp[i] = sqrt(dat[i].x*dat[i].x + dat[i].y*dat[i].y);
+	return amp;
+}
+
+//same as FFT_AMPLITUDE() but just with N^2
+void* FFT_AMPLITUDE_2D(void *ft, uint32_t size) {
+	return FFT_AMPLITUDE(ft, size*size);
+}
