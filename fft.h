@@ -34,10 +34,11 @@ void FFT_MIRROR(void *ft, uint32_t size);
 
 void FFT_MIRROR_2D(void *ft, uint32_t size);
 
-//these functions take your FT and return a new array of amplitudes without phase information
-//you need to call free() on this array yourself
+//takes in your transform and gets the amplitude of every frequency and writes it to amp
+//it is expected that amp is of type FFT_FLOAT_TYPE
+void FFT_AMPLITUDE(void *ft, void *amp, uint32_t size);
 
-void* FFT_AMPLITUDE(void *ft, uint32_t size);
-
-void* FFT_AMPLITUDE_2D(void *ft, uint32_t size);
+inline void FFT_AMPLITUDE_2D(void *ft, void *amp, uint32_t size) {
+	FFT_AMPLITUDE(ft, amp, size*size);
+}
 #endif
